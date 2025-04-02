@@ -1,13 +1,33 @@
 <script setup>
 import { fetchResponse } from '@/assets/fetch'
-import router from '@/router'
 import { onMounted, ref } from 'vue'
+import router from '@/router'
 
 const firstName = ref('')
 const lastName = ref('')
 const userName = ref('')
 const email = ref('')
+const password = ref('')
 
+async function edit() {
+  let data = {
+    userName: userName.value,
+    firstName: firstName.value,
+    lastName: lastName.value,
+    email: email.value,
+    password: password.value,
+  }
+
+  const endpoint = '/user'
+  let response = await fetchResponse(endpoint, 'PATCH', data)
+  if (response.status == 200) {
+    data = await response.json()
+
+    router.push({ name: 'profile' })
+  } else console.log(response.statusText)
+}
+
+//Fix this asap...use a store or local storage
 onMounted(async () => {
   const endpoint = '/user'
   const response = await fetchResponse(endpoint, 'GET')
@@ -24,27 +44,31 @@ onMounted(async () => {
 
 <template>
   <div class="main-column">
-    <h2 class="heading">Profile</h2>
-    <form class="info-display">
+    <h2 class="heading">Edit Profile</h2>
+    <form class="info-display" onsubmit="return false">
       <li class="form__field">
         <label>First Name</label>
-        <input type="text" v-model="firstName" disabled />
+        <input type="text" v-model="firstName" />
       </li>
 
       <li class="form__field">
         <label>Last Name</label>
-        <input type="text" v-model="lastName" disabled />
+        <input type="text" v-model="lastName" />
       </li>
       <li class="form__field span-2">
         <label>UserName</label>
-        <input type="text" v-model="userName" disabled />
+        <input type="text" v-model="userName" />
       </li>
       <li class="form__field span-2">
         <label>Email</label>
-        <input type="text" v-model="email" disabled />
+        <input type="text" v-model="email" />
+      </li>
+      <li class="form__field span-2">
+        <label>Password</label>
+        <input type="password" v-model="password" />
       </li>
 
-      <button class="span-2" @click="router.push({ name: 'edit' })">Edit</button>
+      <button class="span-2" @click="edit">Submit</button>
     </form>
   </div>
 </template>
