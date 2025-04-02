@@ -1,7 +1,7 @@
 <script setup>
 import NavBar from '@/components/NavBar.vue'
 import SideBar from '@/components/SideBar.vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 import { fetchResponse } from '@/assets/fetch'
 import router from '@/router'
 
@@ -30,7 +30,7 @@ async function signOut() {
     <div class="container">
       <div class="container__grid">
         <SideBar></SideBar>
-        <h2 class="heading heading--shiftedRight">Home</h2>
+        <RouterView></RouterView>
       </div>
     </div>
   </section>

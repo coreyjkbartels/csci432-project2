@@ -60,7 +60,7 @@ async function signUp() {
           <input type="password" id="password" name="password" v-model="password" />
         </li>
       </form>
-      <button class="form__button" @click="signUp">Submit</button>
+      <button @click="signUp">Submit</button>
     </div>
   </div>
 </template>
