@@ -1,21 +1,35 @@
 <script setup>
 import NavBar from '@/components/NavBar.vue'
-import SideNav from '@/components/SideNav.vue'
+import SideBar from '@/components/SideBar.vue'
+import { RouterLink } from 'vue-router'
+import { fetchResponse } from '@/assets/fetch'
+import router from '@/router'
+
+async function signOut() {
+  const endpoint = '/user/sign-out'
+
+  const response = await fetchResponse(endpoint, 'POST')
+  if (response.status == 200) {
+    router.push({ name: 'home' })
+  } else console.log(response.statusText)
+}
 </script>
 
 <template>
   <NavBar>
     <div class="nav__links">
-      <RouterLink><h3>Profile</h3></RouterLink>
-      <RouterLink><h3>Parks</h3></RouterLink>
-      <RouterLink :to="{ name: 'home' }"><h3>Sign Out</h3></RouterLink>
+      <RouterLink :to="{ name: 'home' }"><h3>Profile</h3></RouterLink>
+      <RouterLink :to="{ name: 'home' }"><h3>Parks</h3></RouterLink>
+      <a @click="signOut">
+        <h3>Sign Out</h3>
+      </a>
     </div>
   </NavBar>
 
   <section>
     <div class="container">
       <div class="container__grid">
-        <SideNav></SideNav>
+        <SideBar></SideBar>
         <h2 class="heading heading--shiftedRight">Home</h2>
       </div>
     </div>
