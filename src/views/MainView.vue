@@ -18,8 +18,8 @@ async function signOut() {
 <template>
   <NavBar>
     <div class="nav__links">
-      <RouterLink :to="{ name: 'home' }"><h3>Profile</h3></RouterLink>
-      <RouterLink :to="{ name: 'home' }"><h3>Parks</h3></RouterLink>
+      <RouterLink :to="{ name: 'profile' }"><h3>Profile</h3></RouterLink>
+      <RouterLink :to="{ name: 'parks' }"><h3>Parks</h3></RouterLink>
       <a @click="signOut">
         <h3>Sign Out</h3>
       </a>

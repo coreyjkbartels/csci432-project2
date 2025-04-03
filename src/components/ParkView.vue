@@ -32,7 +32,7 @@ search()
     <h2 class="heading">{{ park.fullName }}</h2>
     <p>{{ park.description }}</p>
     <div class="nav__links">
-      <RouterLink :to="{ name: 'main' }">Campgrounds</RouterLink>
+      <RouterLink :to="{ path: `/parks/${park.parkCode}/campgrounds` }">Campgrounds</RouterLink>
       <RouterLink :to="{ path: `/parks/${park.parkCode}/activities` }">Activities</RouterLink>
       <a :href="park.url" target="_blank">Link to Site</a>
     </div>

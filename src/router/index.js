@@ -8,6 +8,7 @@ import EditView from '@/views/EditView.vue'
 import ParksView from '@/views/ParksView.vue'
 import ParkView from '@/components/ParkView.vue'
 import ActivitiesView from '@/views/ActivitiesView.vue'
+import CampgroundView from '@/views/CampgroundView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -61,6 +62,15 @@ const router = createRouter({
           components: {
             default: ParkView,
             right: ActivitiesView,
+          },
+          props: true,
+        },
+        {
+          path: '/parks/:parkCode/campgrounds',
+          name: 'campgrounds',
+          components: {
+            default: ParkView,
+            right: CampgroundView,
           },
           props: true,
         },
