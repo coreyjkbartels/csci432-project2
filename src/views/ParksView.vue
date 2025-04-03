@@ -52,15 +52,6 @@ form {
   gap: 15px;
 }
 
-ul {
-  padding: 0;
-  width: 100%;
-  height: 200px;
-
-  overflow: auto;
-  scrollbar-color: var(--white-8) transparent;
-}
-
 a {
   display: block;
   font: inherit;
