@@ -36,7 +36,7 @@ async function signUp() {
     <RouterLink :to="{ name: 'home' }"><h3>Home</h3></RouterLink>
   </NavBar>
   <div class="container">
-    <div class="form form--left">
+    <div class="form form--right">
       <h1 class="heading form__heading">Sign Up</h1>
       <form action="">
         <li class="form__field">

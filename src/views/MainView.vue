@@ -31,6 +31,7 @@ async function signOut() {
       <div class="container__grid">
         <SideBar></SideBar>
         <RouterView></RouterView>
+        <RouterView name="right"></RouterView>
       </div>
     </div>
   </section>

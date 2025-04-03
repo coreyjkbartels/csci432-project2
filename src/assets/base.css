@@ -100,8 +100,22 @@ img {
   height: auto;
 }
 
+li {
+  list-style: none;
+}
+
 .anton-regular {
   font-family: 'Anton', sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+
+  cursor: pointer;
 }

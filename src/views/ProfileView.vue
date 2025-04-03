@@ -23,7 +23,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="main-column">
+  <div class="main-column white-right-border">
     <h2 class="heading">Profile</h2>
     <form class="info-display">
       <li class="form__field">
@@ -50,9 +50,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.main-column {
-  border-right: 1px solid white;
-}
 .info-display {
   display: grid;
   grid-template: 1fr 1fr 1fr / 1fr 1fr;

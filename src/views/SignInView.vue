@@ -30,7 +30,7 @@ async function signIn() {
     <RouterLink :to="{ name: 'home' }"><h3>Home</h3></RouterLink>
   </NavBar>
   <div class="container">
-    <div class="form form--left">
+    <div class="form form--right">
       <h1 class="heading form__heading">Sign In</h1>
       <form action="">
         <li class="form__field">

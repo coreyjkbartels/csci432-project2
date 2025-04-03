@@ -12,3 +12,12 @@ export async function fetchResponse(endpoint, fetchMethod, data) {
 
   return await fetch(url, options)
 }
+
+export function getQuery(options) {
+  let result = '?'
+  for (const [key, value] of Object.entries(options)) {
+    result += `${key}=${value}&`
+  }
+
+  return result
+}

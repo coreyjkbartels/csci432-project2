@@ -24,6 +24,10 @@
   padding: 0px 60px;
 }
 
+.white-right-border {
+  border-right: 1px solid white;
+}
+
 .heading {
   font-family: 'Anton', Arial, Helvetica, sans-serif;
   text-transform: uppercase;
@@ -101,7 +105,7 @@ section {
   background-color: var(--dark-blue-89);
 }
 
-.form {
+.form--right {
   position: relative;
   left: 65%;
 
@@ -118,11 +122,11 @@ section {
   flex-direction: column;
 
   margin-bottom: 10px;
-  list-style: none;
 }
 
 input {
   border: none;
   padding: 5px 10px;
   border-radius: 3px;
+  width: 100%;
 }

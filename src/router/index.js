@@ -5,6 +5,8 @@ import SignUpView from '@/views/SignUpView.vue'
 import MainView from '@/views/MainView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import EditView from '@/views/EditView.vue'
+import ParksView from '@/views/ParksView.vue'
+import ParkView from '@/components/ParkView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +40,19 @@ const router = createRouter({
           path: '/user/edit',
           name: 'edit',
           component: EditView,
+        },
+        {
+          path: '/parks',
+          name: 'parks',
+          component: ParksView,
+        },
+        {
+          path: '/parks/:parkCode',
+          name: 'park',
+          components: {
+            default: ParkView,
+          },
+          props: true,
         },
       ],
     },
