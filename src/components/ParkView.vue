@@ -28,9 +28,11 @@ search()
 </script>
 
 <template>
-  <div class="main-column white-right-border">
-    <h2 class="heading">{{ park.fullName }}</h2>
-    <p>{{ park.description }}</p>
+  <div class="main-column main-column--sbtwn height-100">
+    <div>
+      <h2 class="heading">{{ park.fullName }}</h2>
+      <p>{{ park.description }}</p>
+    </div>
     <div class="nav__links">
       <RouterLink :to="{ path: `/parks/${park.parkCode}/campgrounds` }">Campgrounds</RouterLink>
       <RouterLink :to="{ path: `/parks/${park.parkCode}/activities` }">Activities</RouterLink>
@@ -42,9 +44,14 @@ search()
 <style scoped>
 .heading {
   text-align: center;
+  margin-bottom: 35px;
 }
 
 a {
-  font-size: 1.1rem;
+  font-size: var(--fs-650);
+}
+
+.nav__links {
+  width: 100%;
 }
 </style>

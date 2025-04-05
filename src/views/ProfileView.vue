@@ -23,7 +23,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="main-column white-right-border">
+  <div class="main-column">
     <h2 class="heading">Profile</h2>
     <form class="info-display">
       <li class="form__field">
@@ -58,7 +58,7 @@ onMounted(async () => {
 
 .info-display input:disabled {
   color: black;
-  background-color: var(--white-9);
+  background-color: var(--clr-neutral-200);
 }
 
 .span-2 {

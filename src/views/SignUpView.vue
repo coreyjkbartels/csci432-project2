@@ -35,32 +35,35 @@ async function signUp() {
   <NavBar>
     <RouterLink :to="{ name: 'home' }"><h3>Home</h3></RouterLink>
   </NavBar>
-  <div class="container">
-    <div class="form form--right">
-      <h1 class="heading form__heading">Sign Up</h1>
-      <form action="">
-        <li class="form__field">
-          <label for="uname">Username</label>
-          <input type="text" id="uname" name="uname" v-model="userName" />
-        </li>
-        <li class="form__field">
-          <label for="fname">First Name</label>
-          <input type="text" id="fname" name="fname" v-model="firstName" />
-        </li>
-        <li class="form__field">
-          <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="lname" v-model="lastName" />
-        </li>
-        <li class="form__field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" v-model="email" />
-        </li>
-        <li class="form__field">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" v-model="password" />
-        </li>
-      </form>
-      <button @click="signUp">Submit</button>
+
+  <section>
+    <div class="container main-column">
+      <div class="form">
+        <h2 class="heading form__heading">Sign Up</h2>
+        <form action="">
+          <li class="form__field">
+            <label for="uname">Username</label>
+            <input type="text" id="uname" name="uname" v-model="userName" />
+          </li>
+          <li class="form__field">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" v-model="firstName" />
+          </li>
+          <li class="form__field">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" v-model="lastName" />
+          </li>
+          <li class="form__field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" v-model="email" />
+          </li>
+          <li class="form__field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" v-model="password" />
+          </li>
+        </form>
+        <button @click="signUp">Submit</button>
+      </div>
     </div>
-  </div>
+  </section>
 </template>

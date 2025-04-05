@@ -1,14 +1,17 @@
 @import './base.css';
 
-#app {
-  margin: 0 auto;
-  padding: 20px 0px;
-  font-weight: normal;
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.container {
-  width: 65%;
-  margin: 0 auto;
+section {
+  width: 100vw;
+  height: 100%;
+  padding: 60px 10%;
+
+  background-color: var(--clr-blue-700);
 }
 
 .container__grid {
@@ -21,11 +24,12 @@
   flex-direction: column;
   align-items: center;
   gap: 30px;
+
   padding: 0px 60px;
 }
 
-.white-right-border {
-  border-right: 1px solid white;
+.main-column--sbtwn {
+  justify-content: space-between;
 }
 
 .heading {
@@ -44,18 +48,18 @@ button {
 
   color: inherit;
   font-family: 'Anton';
+  font-size: var(--fs-650);
   text-decoration: none;
   text-transform: uppercase;
 }
 
 a:hover,
 button {
-  color: var(--dark-blue-89);
-  background-color: var(--white-8);
+  color: var(--clr-blue-700);
+  background-color: var(--clr-neutral-100);
 }
 
 button {
-  font-size: 1.1rem;
   letter-spacing: 1px;
 
   width: 100%;
@@ -63,18 +67,9 @@ button {
 }
 
 button:hover {
-  background-color: var(--dark-blue-89);
-  color: var(--white-8);
-  border: 1px solid var(--white-8);
-}
-
-section {
-  width: 100vw;
-  height: 450px;
-  padding: 60px 0px;
-  margin: 20px auto;
-
-  background-color: var(--dark-blue-89);
+  background-color: var(--clr-blue-700);
+  color: var(--clr-neutral-300);
+  border: 1px solid var(--clr-neutral-300);
 }
 
 .nav {
@@ -91,6 +86,7 @@ section {
 
 .nav__links {
   display: flex;
+  justify-content: space-between;
 }
 
 .form {
@@ -98,18 +94,8 @@ section {
   flex-direction: column;
   gap: 30px;
 
-  width: 35%;
-  padding: 40px 60px;
+  width: 25%;
   border-radius: 10px;
-
-  background-color: var(--dark-blue-89);
-}
-
-.form--right {
-  position: relative;
-  left: 65%;
-
-  margin-top: 50px;
 }
 
 .form__heading {
@@ -132,10 +118,16 @@ input {
 }
 
 ul {
+  flex: 1;
+
   padding: 0;
   width: 100%;
-  height: 200px;
+  max-height: 320px;
 
   overflow: auto;
-  scrollbar-color: var(--white-8) transparent;
+  scrollbar-color: var(--clr-neutral-300) transparent;
+}
+
+.height-100 {
+  height: 100%;
 }

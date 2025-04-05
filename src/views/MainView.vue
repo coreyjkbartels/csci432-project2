@@ -18,21 +18,29 @@ async function signOut() {
 <template>
   <NavBar>
     <div class="nav__links">
-      <RouterLink :to="{ name: 'profile' }"><h3>Profile</h3></RouterLink>
-      <RouterLink :to="{ name: 'parks' }"><h3>Parks</h3></RouterLink>
-      <a @click="signOut">
-        <h3>Sign Out</h3>
-      </a>
+      <RouterLink :to="{ name: 'profile' }">Profile</RouterLink>
+      <RouterLink :to="{ name: 'parks' }">Parks</RouterLink>
+      <a @click="signOut"> Sign Out </a>
     </div>
   </NavBar>
 
   <section>
-    <div class="container">
-      <div class="container__grid">
-        <SideBar></SideBar>
-        <RouterView></RouterView>
+    <div class="height-100">
+      <div class="container__grid height-100">
+        <div class="white-border-right">
+          <SideBar></SideBar>
+        </div>
+        <div class="white-border-right">
+          <RouterView></RouterView>
+        </div>
         <RouterView name="right"></RouterView>
       </div>
     </div>
   </section>
 </template>
+
+<style>
+.white-border-right {
+  border-right: 1px solid white;
+}
+</style>

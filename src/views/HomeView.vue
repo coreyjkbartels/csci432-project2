@@ -6,33 +6,35 @@ import { RouterLink } from 'vue-router'
 <template>
   <NavBar
     ><div class="nav__links">
-      <RouterLink :to="{ name: 'signIn' }"><h3>Sign In</h3></RouterLink>
-      <RouterLink :to="{ name: 'signUp' }"><h3>Sign Up</h3></RouterLink>
+      <RouterLink :to="{ name: 'signIn' }">Sign In</RouterLink>
+      <RouterLink :to="{ name: 'signUp' }">Sign Up</RouterLink>
     </div>
   </NavBar>
 
-  <div class="container">
+  <section>
     <div class="hero">
       <h1 class="heading hero__heading">
         Where nature meets planning - Seamless National Park Trips!
       </h1>
-
       <p class="hero__description">
         Say goodbye to scattered notes and endless group chats. Plan your national park adventure
         seamlessly-wherever the trail takes you.
       </p>
     </div>
-  </div>
+  </section>
 </template>
 
-<style>
+<style scoped>
+section {
+  background-color: transparent;
+}
+
 .hero {
   width: 87%;
-  margin-top: 100px;
 }
 
 .hero__heading {
-  font-size: 4.4rem;
+  font-size: var(--fs-1000);
   line-height: 95%;
 }
 

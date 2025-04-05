@@ -29,20 +29,23 @@ async function signIn() {
   <NavBar>
     <RouterLink :to="{ name: 'home' }"><h3>Home</h3></RouterLink>
   </NavBar>
-  <div class="container">
-    <div class="form form--right">
-      <h1 class="heading form__heading">Sign In</h1>
-      <form action="">
-        <li class="form__field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" v-model="email" />
-        </li>
-        <li class="form__field">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" v-model="password" />
-        </li>
-      </form>
-      <button @click="signIn">Submit</button>
+
+  <section>
+    <div class="main-column">
+      <div class="form">
+        <h2 class="heading form__heading">Sign In</h2>
+        <form action="">
+          <li class="form__field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" v-model="email" />
+          </li>
+          <li class="form__field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" v-model="password" />
+          </li>
+        </form>
+        <button @click="signIn">Submit</button>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
