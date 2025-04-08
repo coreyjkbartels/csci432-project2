@@ -9,7 +9,7 @@ const parks = ref([])
 async function search() {
   const queryOptions = {
     stateCode: stateCode.value,
-    limit: 25,
+    limit: 15,
   }
 
   const endpoint = `/national-parks/summary${getQuery(queryOptions)}`
@@ -56,20 +56,5 @@ a {
   display: block;
   font: inherit;
   width: 95%;
-}
-
-.material-symbols-outlined {
-  color: white;
-  background-color: transparent;
-
-  width: auto;
-  padding: 5px 6px;
-  border: 1px solid transparent;
-  border-radius: 3px;
-}
-
-.material-symbols-outlined:hover {
-  background-color: var(--clr-neutral-200);
-  color: var(--clr-blue-700);
 }
 </style>

@@ -45,14 +45,16 @@ async function signUp() {
             <label for="uname">Username</label>
             <input type="text" id="uname" name="uname" v-model="userName" />
           </li>
-          <li class="form__field">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" name="fname" v-model="firstName" />
-          </li>
-          <li class="form__field">
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lname" v-model="lastName" />
-          </li>
+          <div class="row">
+            <li class="form__field">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="fname" v-model="firstName" />
+            </li>
+            <li class="form__field">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lname" v-model="lastName" />
+            </li>
+          </div>
           <li class="form__field">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" v-model="email" />
@@ -62,8 +64,16 @@ async function signUp() {
             <input type="password" id="password" name="password" v-model="password" />
           </li>
         </form>
+
         <button @click="signUp">Submit</button>
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.row {
+  display: flex;
+  gap: 10px;
+}
+</style>

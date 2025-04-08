@@ -5,7 +5,7 @@ import SignUpView from '@/views/SignUpView.vue'
 import MainView from '@/views/MainView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import EditView from '@/views/EditView.vue'
-import ParksView from '@/views/ParksView.vue'
+import SearchParks from '@/views/SearchParks.vue'
 import ParkView from '@/components/ParkView.vue'
 import ActivitiesView from '@/views/ActivitiesView.vue'
 import CampgroundView from '@/views/CampgroundView.vue'
@@ -46,7 +46,7 @@ const router = createRouter({
         {
           path: '/parks',
           name: 'parks',
-          component: ParksView,
+          component: SearchParks,
         },
         {
           path: '/parks/:parkCode',
