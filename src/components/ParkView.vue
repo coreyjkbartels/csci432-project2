@@ -1,6 +1,7 @@
 <script setup>
 import { fetchResponse, getQuery } from '@/assets/fetch'
 import { RouterLink } from 'vue-router'
+import router from '@/router'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -36,9 +37,13 @@ search()
 </script>
 
 <template>
-  <div class="main-column main-column--sbtwn height-100">
+  <div class="main-column height-100">
     <div>
-      <h2 class="heading">{{ `${park.fullName}, ${park.states}` }}</h2>
+      <div class="header-grid">
+        <span class="material-symbols-outlined" @click="router.back"> arrow_back </span>
+        <h2 class="heading header-grid__heading">{{ `${park.fullName}, ${park.states}` }}</h2>
+        <span class="material-symbols-outlined" @click="router.back"> add </span>
+      </div>
 
       <div class="park-image" :style="{ backgroundImage: `url(${imageUrl})` }"></div>
 
@@ -54,11 +59,9 @@ search()
 </template>
 
 <style scoped>
-.heading {
-  text-align: center;
-  margin-bottom: 35px;
+.header-grid {
+  margin-bottom: 20px;
 }
-
 a {
   font-size: var(--fs-650);
 }

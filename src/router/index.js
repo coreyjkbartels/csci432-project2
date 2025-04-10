@@ -4,11 +4,14 @@ import SignInView from '@/views/SignInView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import MainView from '@/views/MainView.vue'
 import ProfileView from '@/views/ProfileView.vue'
-import EditView from '@/views/EditView.vue'
+import EditUser from '@/views/EditUser.vue'
 import SearchParks from '@/views/SearchParks.vue'
 import ParkView from '@/components/ParkView.vue'
 import ActivitiesView from '@/views/ActivitiesView.vue'
 import CampgroundView from '@/views/CampgroundView.vue'
+import AllExcursions from '@/views/AllExcursions.vue'
+import CreateExcursion from '@/views/CreateExcursion.vue'
+import ExcursionView from '@/views/ExcursionView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,7 +44,7 @@ const router = createRouter({
         {
           path: '/user/edit',
           name: 'edit',
-          component: EditView,
+          component: EditUser,
         },
         {
           path: '/parks',
@@ -71,6 +74,29 @@ const router = createRouter({
           components: {
             default: ParkView,
             right: CampgroundView,
+          },
+          props: true,
+        },
+        {
+          path: '/excursions',
+          name: 'excursions',
+          components: {
+            default: AllExcursions,
+          },
+        },
+        {
+          path: '/excursions/new',
+          name: 'createExcursion',
+          components: {
+            default: AllExcursions,
+            right: CreateExcursion,
+          },
+        },
+        {
+          path: '/excursions/:_id',
+          name: 'excursion',
+          components: {
+            default: ExcursionView,
           },
           props: true,
         },

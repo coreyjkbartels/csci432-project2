@@ -26,7 +26,7 @@ search()
 </script>
 
 <template>
-  <div class="main-column">
+  <div class="main-column main-column--right">
     <h2 class="heading">Activities</h2>
 
     <ul>
@@ -36,12 +36,3 @@ search()
     </ul>
   </div>
 </template>
-
-<style scoped>
-.main-column {
-  align-items: start;
-
-  padding: 0px;
-  padding-left: 20px;
-}
-</style>

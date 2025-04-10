@@ -55,6 +55,5 @@ form {
 a {
   display: block;
   font: inherit;
-  width: 95%;
 }
 </style>

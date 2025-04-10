@@ -6,6 +6,7 @@
     <div class="nav__links nav--column">
       <RouterLink :to="{ name: 'main' }">Home</RouterLink>
       <RouterLink :to="{ name: 'parks' }">Parks</RouterLink>
+      <RouterLink :to="{ name: 'excursions' }">Excursions</RouterLink>
       <RouterLink :to="{ name: 'profile' }">Profile</RouterLink>
     </div>
   </div>

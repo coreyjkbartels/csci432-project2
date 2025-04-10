@@ -52,20 +52,20 @@ onMounted(async () => {
       </li>
 
       <li class="form__field">
-        <label>Last Name</label>
-        <input type="text" v-model="lastName" />
+        <label for="lastName">Last Name</label>
+        <input type="text" v-model="lastName" id="lastName" />
       </li>
       <li class="form__field span-2">
-        <label>UserName</label>
-        <input type="text" v-model="userName" />
+        <label for="userName">UserName</label>
+        <input type="text" v-model="userName" id="userName" />
       </li>
       <li class="form__field span-2">
-        <label>Email</label>
-        <input type="text" v-model="email" />
+        <label for="email">Email</label>
+        <input type="text" v-model="email" id="email" />
       </li>
       <li class="form__field span-2">
-        <label>Password</label>
-        <input type="password" v-model="password" />
+        <label for="password">Password</label>
+        <input type="password" v-model="password" id="password" />
       </li>
 
       <button class="span-2" @click="edit">Submit</button>
