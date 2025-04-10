@@ -44,7 +44,11 @@ async function signIn() {
             <input type="password" id="password" name="password" v-model="password" />
           </li>
         </form>
-        <button @click="signIn">Submit</button>
+
+        <div class="row">
+          <RouterLink class="width-100" :to="{ name: 'signUp' }">Sign Up</RouterLink>
+          <button @click="signIn">Submit</button>
+        </div>
       </div>
     </div>
   </section>

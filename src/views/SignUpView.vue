@@ -65,7 +65,10 @@ async function signUp() {
           </li>
         </form>
 
-        <button @click="signUp">Submit</button>
+        <div class="row">
+          <RouterLink class="width-100" :to="{ name: 'signIn' }">Sign In</RouterLink>
+          <button @click="signUp">Submit</button>
+        </div>
       </div>
     </div>
   </section>

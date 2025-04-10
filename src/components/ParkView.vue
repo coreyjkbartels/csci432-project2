@@ -8,6 +8,7 @@ const props = defineProps({
 })
 
 const park = ref('')
+const imageUrl = ref('')
 
 async function search() {
   const queryOptions = {
@@ -21,7 +22,14 @@ async function search() {
   if (response.status == 200) {
     const data = await response.json()
     park.value = data.data[0]
+    populateImageUrl(data.data[0].images)
   } else console.log(response.status)
+}
+
+function populateImageUrl(images) {
+  let numImages = images.length
+  let imageIndex = Math.floor(Math.random() * numImages)
+  imageUrl.value = images[imageIndex].url
 }
 
 search()
@@ -32,14 +40,7 @@ search()
     <div>
       <h2 class="heading">{{ `${park.fullName}, ${park.states}` }}</h2>
 
-      <!-- <div class="contacts">
-        <span v-for="number in park.contacts.phoneNumbers" :key="number.id">
-          {{ `${number.type}: ${number.phoneNumber}` }}
-        </span>
-        <span v-for="email in park.contacts.emailAddresses" :key="email.id">
-          {{ email.emailAddress }}
-        </span>
-      </div> -->
+      <div class="park-image" :style="{ backgroundImage: `url(${imageUrl})` }"></div>
 
       <p>{{ park.description }}</p>
     </div>
@@ -73,5 +74,14 @@ a {
 
   width: 100%;
   margin-bottom: 10px;
+}
+
+.park-image {
+  border-radius: 7px;
+  height: 300px;
+  margin-bottom: 20px;
+
+  background-size: cover;
+  overflow: hidden;
 }
 </style>
