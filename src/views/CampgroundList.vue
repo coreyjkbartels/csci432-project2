@@ -20,6 +20,7 @@ async function search() {
   if (response.status == 200) {
     const data = await response.json()
     camps.value = data.data
+    console.log(data.data)
   } else console.log(response.status)
 }
 
@@ -31,10 +32,14 @@ search()
     <h2 class="heading">Campgrounds</h2>
 
     <ul>
-      <li v-for="camp in camps" :key="camp.id">
+      <RouterLink
+        class="list-link"
+        v-for="camp in camps"
+        :key="camp.id"
+        :to="{ path: `/campgrounds/${camp.id}` }"
+      >
         {{ camp.name }}
-        <!-- {{ camp.description }} -->
-      </li>
+      </RouterLink>
     </ul>
   </div>
 </template>

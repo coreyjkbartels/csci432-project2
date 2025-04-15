@@ -8,23 +8,27 @@ const props = defineProps({
   id: String,
 })
 
-const activity = ref('')
+const campground = ref('')
 const imageUrl = ref('')
+const phoneNumbers = ref()
+const emailAddresses = ref()
 
 async function search() {
   const queryOptions = {
-    id: props.id,
+    q: props.id,
     limit: 1,
   }
 
-  const endpoint = `/things-to-do${getQuery(queryOptions)}`
+  const endpoint = `/campgrounds${getQuery(queryOptions)}`
   const response = await fetchResponse(endpoint, 'GET')
 
   if (response.status == 200) {
     const data = await response.json()
-    activity.value = data.data[0]
+    campground.value = data.data[0]
+    phoneNumbers.value = campground.value.contacts.phoneNumbers
+    emailAddresses.value = campground.value.contacts.emailAddresses
+
     populateImageUrl(data.data[0].images)
-    console.log(activity.value)
   } else console.log(response.status)
 }
 
@@ -39,7 +43,7 @@ search()
   <DetailsTemplate class="main-column--right">
     <template #header-grid>
       <span class="material-symbols-outlined" @click="router.back"> arrow_back </span>
-      <h2 class="heading header-grid__heading">Activity</h2>
+      <h2 class="heading header-grid__heading">Campground</h2>
       <span class="material-symbols-outlined" @click="router.back"> add </span>
     </template>
 
@@ -48,30 +52,28 @@ search()
     </template>
 
     <template #title>
-      <h2 class="center-text">{{ activity.title }}</h2>
+      <h2 class="center-text">{{ campground.name }}</h2>
     </template>
 
     <template #description>
-      <p>{{ activity.shortDescription }}</p>
+      <p>{{ campground.description }}</p>
     </template>
 
     <template #other-info>
       <div class="row">
-        <h4>Location:</h4>
-        <span>{{ activity.location }}</span>
+        <h4>Phone Numbers:</h4>
+        <span v-for="number in phoneNumbers" :key="number.id">{{ number.phoneNumber }}</span>
       </div>
       <div class="row">
-        <h4>Duration:</h4>
-        <span>{{ activity.duration }}</span>
-      </div>
-      <div class="row">
-        <h4>Do Fees Apply:</h4>
-        <span>{{ activity.doFeesApply }}</span>
+        <h4>Email Addresses:</h4>
+        <span v-for="email in emailAddresses" :key="email.id">{{ email.emailAddress }}</span>
       </div>
     </template>
 
     <template #links
-      ><a :href="activity.url" style="margin-left: auto" target="_blank">Link to Site</a></template
+      ><a :href="campground.url" style="margin-left: auto" target="_blank"
+        >Link to Site</a
+      ></template
     >
   </DetailsTemplate>
 </template>

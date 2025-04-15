@@ -12,6 +12,8 @@ const park = ref('')
 const imageUrl = ref('')
 const phoneNumbers = ref()
 const emailAddresses = ref()
+const hasTTD = ref()
+const hasCampgrounds = ref()
 
 async function search() {
   const queryOptions = {
@@ -28,6 +30,39 @@ async function search() {
     phoneNumbers.value = park.value.contacts.phoneNumbers
     emailAddresses.value = park.value.contacts.emailAddresses
     populateImageUrl(data.data[0].images)
+    searchTTD()
+    searchCampgrounds()
+  } else console.log(response.status)
+}
+
+async function searchTTD() {
+  const queryOptions = {
+    parkCode: props.parkCode,
+    limit: 1,
+  }
+
+  const endpoint = `/things-to-do${getQuery(queryOptions)}`
+  const response = await fetchResponse(endpoint, 'GET')
+
+  if (response.status == 200) {
+    const data = await response.json()
+    hasTTD.value = data.data.length > 0
+  } else console.log(response.status)
+}
+
+async function searchCampgrounds() {
+  const queryOptions = {
+    parkCode: props.parkCode,
+    limit: 15,
+  }
+
+  const endpoint = `/campgrounds${getQuery(queryOptions)}`
+  const response = await fetchResponse(endpoint, 'GET')
+
+  if (response.status == 200) {
+    const data = await response.json()
+    hasCampgrounds.value = data.data.length > 0
+    console.log(data.data)
   } else console.log(response.status)
 }
 
@@ -76,8 +111,12 @@ search()
     </template>
 
     <template #links>
-      <RouterLink :to="{ path: `/parks/${park.parkCode}/campgrounds` }">Campgrounds</RouterLink>
-      <RouterLink :to="{ path: `/parks/${park.parkCode}/activities` }">Activities</RouterLink>
+      <RouterLink :to="{ path: `/parks/${park.parkCode}/campgrounds` }" v-if="hasCampgrounds"
+        >Campgrounds</RouterLink
+      >
+      <RouterLink :to="{ path: `/parks/${park.parkCode}/activities` }" v-if="hasTTD"
+        >Activities</RouterLink
+      >
       <a :href="park.url" target="_blank">Link to Site</a>
     </template>
   </DetailsTemplate>

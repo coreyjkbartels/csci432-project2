@@ -13,6 +13,7 @@ import ExcursionList from '@/views/ExcursionList.vue'
 import CreateExcursion from '@/views/CreateExcursion.vue'
 import ExcursionDetails from '@/views/ExcursionDetails.vue'
 import ActivityDetails from '@/views/ActivityDetails.vue'
+import CampgroundDetails from '@/views/CampgroundDetails.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -84,6 +85,15 @@ const router = createRouter({
           components: {
             default: ParkDetails,
             right: CampgroundList,
+          },
+          props: true,
+        },
+        {
+          path: '/campgrounds/:id',
+          name: 'campground',
+          components: {
+            default: ParkDetails,
+            right: CampgroundDetails,
           },
           props: true,
         },
