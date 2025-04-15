@@ -11,7 +11,7 @@ async function getExcursions() {
   if (response.status == 200) {
     const data = await response.json()
     excursions.value = data.excursions
-    console.log('Success')
+    console.log(data)
   } else console.log(response.status)
 }
 

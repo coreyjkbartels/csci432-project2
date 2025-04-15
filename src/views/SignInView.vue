@@ -30,7 +30,7 @@ async function signIn() {
     <RouterLink :to="{ name: 'home' }"><h3>Home</h3></RouterLink>
   </NavBar>
 
-  <section>
+  <section class="height-100">
     <div class="main-column">
       <div class="form">
         <h2 class="heading form__heading">Sign In</h2>

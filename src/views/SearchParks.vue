@@ -1,6 +1,5 @@
 <script setup>
 import { fetchResponse, getQuery } from '@/assets/fetch'
-import router from '@/router'
 import { ref } from 'vue'
 
 const stateCode = ref('')
@@ -32,13 +31,14 @@ async function search() {
     </form>
 
     <ul>
-      <a
+      <RouterLink
+        class="list-link"
         v-for="park in parks"
         :key="park.id"
-        @click="router.push({ path: `/parks/${park.parkCode}` })"
+        :to="{ path: `/parks/${park.parkCode}` }"
       >
         {{ park.name }}
-      </a>
+      </RouterLink>
     </ul>
   </div>
 </template>
@@ -50,10 +50,5 @@ form {
 
   display: flex;
   gap: 15px;
-}
-
-a {
-  display: block;
-  font: inherit;
 }
 </style>

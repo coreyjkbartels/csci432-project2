@@ -12,6 +12,7 @@ import CampgroundView from '@/views/CampgroundView.vue'
 import AllExcursions from '@/views/AllExcursions.vue'
 import CreateExcursion from '@/views/CreateExcursion.vue'
 import ExcursionView from '@/views/ExcursionView.vue'
+import ActivityView from '@/views/ActivityView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -65,6 +66,15 @@ const router = createRouter({
           components: {
             default: ParkView,
             right: ActivitiesView,
+          },
+          props: true,
+        },
+        {
+          path: '/activities/:id',
+          name: 'activity',
+          components: {
+            default: ParkView,
+            right: ActivityView,
           },
           props: true,
         },

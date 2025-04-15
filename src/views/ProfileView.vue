@@ -8,17 +8,21 @@ const lastName = ref('')
 const userName = ref('')
 const email = ref('')
 
+function assignInfo(data) {
+  firstName.value = data.firstName
+  lastName.value = data.lastName
+  userName.value = data.userName
+  email.value = data.email
+}
+
 onMounted(async () => {
   const endpoint = '/user'
   const response = await fetchResponse(endpoint, 'GET')
 
   if (response.status == 200) {
-    const data = await response.json()
-    firstName.value = data.firstName
-    lastName.value = data.lastName
-    userName.value = data.userName
-    email.value = data.email
-  }
+    const data = (await response.json()).user
+    assignInfo(data)
+  } else console.log(response)
 })
 </script>
 

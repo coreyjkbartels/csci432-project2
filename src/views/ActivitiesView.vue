@@ -27,12 +27,17 @@ search()
 
 <template>
   <div class="main-column main-column--right">
-    <h2 class="heading">Activities</h2>
+    <h2 class="heading heading--shiftedRight">Activities</h2>
 
     <ul>
-      <li v-for="activity in activities" :key="activity.id">
+      <RouterLink
+        class="list-link"
+        v-for="activity in activities"
+        :key="activity.id"
+        :to="{ path: `/activities/${activity.id}` }"
+      >
         {{ activity.title }}
-      </li>
+      </RouterLink>
     </ul>
   </div>
 </template>

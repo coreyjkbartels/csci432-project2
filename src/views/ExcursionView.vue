@@ -10,6 +10,7 @@ const props = defineProps({
 const excursion = ref('')
 async function getExcursion() {
   const endpoint = `/excursion/${props._id}`
+  console.log(endpoint)
   const response = await fetchResponse(endpoint, 'GET')
 
   if (response.status == 200) {
