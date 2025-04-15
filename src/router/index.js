@@ -5,14 +5,14 @@ import SignUpView from '@/views/SignUpView.vue'
 import MainView from '@/views/MainView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import EditUser from '@/views/EditUser.vue'
-import SearchParks from '@/views/SearchParks.vue'
-import ParkView from '@/components/ParkView.vue'
-import ActivitiesView from '@/views/ActivitiesView.vue'
-import CampgroundView from '@/views/CampgroundView.vue'
-import AllExcursions from '@/views/AllExcursions.vue'
+import ParkList from '@/views/ParkList.vue'
+import ParkDetails from '@/views/ParkDetails.vue'
+import ActivityList from '@/views/ActivityList.vue'
+import CampgroundList from '@/views/CampgroundList.vue'
+import ExcursionList from '@/views/ExcursionList.vue'
 import CreateExcursion from '@/views/CreateExcursion.vue'
-import ExcursionView from '@/views/ExcursionView.vue'
-import ActivityView from '@/views/ActivityView.vue'
+import ExcursionDetails from '@/views/ExcursionDetails.vue'
+import ActivityDetails from '@/views/ActivityDetails.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,13 +50,13 @@ const router = createRouter({
         {
           path: '/parks',
           name: 'parks',
-          component: SearchParks,
+          component: ParkList,
         },
         {
           path: '/parks/:parkCode',
           name: 'park',
           components: {
-            default: ParkView,
+            default: ParkDetails,
           },
           props: true,
         },
@@ -64,8 +64,8 @@ const router = createRouter({
           path: '/parks/:parkCode/activities',
           name: 'activities',
           components: {
-            default: ParkView,
-            right: ActivitiesView,
+            default: ParkDetails,
+            right: ActivityList,
           },
           props: true,
         },
@@ -73,8 +73,8 @@ const router = createRouter({
           path: '/activities/:id',
           name: 'activity',
           components: {
-            default: ParkView,
-            right: ActivityView,
+            default: ParkDetails,
+            right: ActivityDetails,
           },
           props: true,
         },
@@ -82,8 +82,8 @@ const router = createRouter({
           path: '/parks/:parkCode/campgrounds',
           name: 'campgrounds',
           components: {
-            default: ParkView,
-            right: CampgroundView,
+            default: ParkDetails,
+            right: CampgroundList,
           },
           props: true,
         },
@@ -91,14 +91,14 @@ const router = createRouter({
           path: '/excursions',
           name: 'excursions',
           components: {
-            default: AllExcursions,
+            default: ExcursionList,
           },
         },
         {
           path: '/excursions/new',
           name: 'createExcursion',
           components: {
-            default: AllExcursions,
+            default: ExcursionList,
             right: CreateExcursion,
           },
         },
@@ -106,7 +106,7 @@ const router = createRouter({
           path: '/excursions/:_id',
           name: 'excursion',
           components: {
-            default: ExcursionView,
+            default: ExcursionDetails,
           },
           props: true,
         },
