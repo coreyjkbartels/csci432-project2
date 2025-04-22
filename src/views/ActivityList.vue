@@ -1,5 +1,6 @@
 <script setup>
 import { fetchResponse, getQuery } from '@/assets/fetch'
+import router from '@/router'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -27,14 +28,16 @@ search()
 
 <template>
   <div class="main-column main-column--right">
-    <h2 class="heading heading--shiftedRight">Activities</h2>
-
+    <div class="header-grid">
+      <a class="material-symbols-outlined" @click="router.back">arrow_back </a>
+      <h2 class="heading header-grid__heading">Activities</h2>
+    </div>
     <ul>
       <RouterLink
         class="list-link"
         v-for="activity in activities"
         :key="activity.id"
-        :to="{ path: `/activities/${activity.id}` }"
+        :to="{ path: `${router.currentRoute.value.fullPath}/${activity.id}` }"
       >
         {{ activity.title }}
       </RouterLink>

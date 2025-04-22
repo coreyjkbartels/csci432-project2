@@ -10,6 +10,8 @@ export const useTripsStore = defineStore('trips', () => {
   const parkName = ref('')
   const campgroundName = ref('')
   const campgroundId = ref('')
+  const activityIds = ref([])
+  const activityNames = ref([])
   const parkcode = ref('')
 
   function $reset() {
@@ -21,6 +23,8 @@ export const useTripsStore = defineStore('trips', () => {
     parkName.value = ref('')
     campgroundName.value = ref('')
     campgroundId.value = ref('')
+    activityIds.value = ref([])
+    activityNames.value = ref([])
     parkcode.value = ref('')
   }
   return {
@@ -33,6 +37,8 @@ export const useTripsStore = defineStore('trips', () => {
     parkName,
     campgroundName,
     campgroundId,
+    activityIds,
+    activityNames,
     $reset,
   }
 })

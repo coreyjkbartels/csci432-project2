@@ -1,7 +1,7 @@
 <script setup>
 import { fetchResponse, getQuery } from '@/assets/fetch'
 import router from '@/router'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, toRaw } from 'vue'
 
 const props = defineProps({
   trip_id: String,
@@ -20,6 +20,7 @@ async function getTrip() {
     trip.value = data.trip
     getPark(trip.value.park)
     getCampground(trip.value.campground)
+    for (let activityId in toRaw(trip.value.thingstodo)) getActivity(activityId)
   } else console.log(response.status)
 }
 
@@ -62,6 +63,22 @@ async function getPark(parkId) {
   } else console.log(response.status)
 }
 
+const activities = ref([])
+async function getActivity(activityId) {
+  const queryOptions = {
+    id: activityId,
+    limit: 1,
+  }
+
+  const endpoint = `/things-to-do${getQuery(queryOptions)}`
+  const response = await fetchResponse(endpoint, 'GET')
+
+  if (response.status == 200) {
+    const data = await response.json()
+    activities.value.push(data.data[0].title)
+  } else console.log(response.status)
+}
+
 onMounted(() => {
   getTrip()
 })
@@ -89,11 +106,9 @@ onMounted(() => {
     </div>
 
     <div class="width-100">
-      <h3>Things To Do</h3>
+      <h3>Activities</h3>
       <ul>
-        <a class="list-link" v-for="activity in trip.thingstodo" :key="activity.id">{{
-          activity.name
-        }}</a>
+        <span v-for="activity in activities" :key="activity.id">{{ activity }}</span>
       </ul>
     </div>
 

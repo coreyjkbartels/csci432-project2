@@ -21,7 +21,6 @@ async function search() {
   if (response.status == 200) {
     const data = await response.json()
     camps.value = data.data
-    console.log(data.data)
   } else console.log(response.status)
 }
 
@@ -30,7 +29,10 @@ search()
 
 <template>
   <div class="main-column main-column--right">
-    <h2 class="heading">Campgrounds</h2>
+    <div class="header-grid">
+      <a class="material-symbols-outlined" @click="router.back">arrow_back </a>
+      <h2 class="heading header-grid__heading">Campgrounds</h2>
+    </div>
 
     <ul>
       <RouterLink

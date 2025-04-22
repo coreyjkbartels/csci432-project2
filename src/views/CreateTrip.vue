@@ -4,6 +4,7 @@ import router from '@/router'
 import { useExcursionStore } from '@/stores/excursions'
 import { useTripsStore } from '@/stores/trips'
 import { storeToRefs } from 'pinia'
+import { toRaw } from 'vue'
 
 const tripStore = useTripsStore()
 const {
@@ -16,6 +17,8 @@ const {
   parkcode,
   campgroundName,
   campgroundId,
+  activityIds,
+  activityNames,
 } = storeToRefs(tripStore)
 
 const excursionStore = useExcursionStore()
@@ -29,8 +32,12 @@ async function create() {
     startDate: startDate.value,
     endDate: endDate.value,
     park: parkId.value,
-    campground: campgroundId.value,
+    thingstodo: toRaw(activityIds.value),
   }
+
+  console.log(toRaw(activityIds.value))
+
+  if (campgroundId.value) data.campground = campgroundId.value
 
   const response = await fetchResponse(endpoint, 'POST', data)
 
@@ -93,6 +100,21 @@ async function create() {
           >
         </div>
         <span class="width-100">{{ campgroundName }}</span>
+      </li>
+
+      <li class="form__field">
+        <div class="row">
+          <h3>Activities</h3>
+          <a
+            class="material-symbols-outlined"
+            @click="router.push({ path: `/trips/new/parks/${parkcode}/activities` })"
+            v-if="parkId"
+            >add</a
+          >
+        </div>
+        <span class="width-100" v-for="activity in activityNames" :key="activity.id">{{
+          activity
+        }}</span>
       </li>
       <button class="span-2 margin-v20" @click="create">Submit</button>
     </form>

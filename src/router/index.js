@@ -167,6 +167,24 @@ const router = createRouter({
           },
           props: true,
         },
+        {
+          path: '/trips/new/parks/:parkCode/activities',
+          name: 'addActivities',
+          components: {
+            default: CreateExcursion,
+            right: ActivityList,
+          },
+          props: true,
+        },
+        {
+          path: '/trips/new/parks/:parkCode/activities/:id',
+          name: 'addActivity',
+          components: {
+            default: CreateExcursion,
+            right: ActivityDetails,
+          },
+          props: true,
+        },
 
         {
           path: '/trips/:trip_id',

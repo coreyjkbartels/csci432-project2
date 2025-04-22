@@ -23,7 +23,6 @@ async function create() {
 
   if (response.status == 201) {
     const responseData = await response.json()
-    console.log(responseData)
 
     excursionStore.$reset()
     router.push({ name: 'excursions' })
@@ -31,14 +30,11 @@ async function create() {
 }
 
 function getIds(tripObjects) {
-  console.log(tripObjects)
   let result = []
 
   for (let trip of tripObjects) {
     result.push(trip._id)
   }
-
-  console.log(result)
 
   return result
 }

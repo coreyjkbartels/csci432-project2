@@ -3,10 +3,15 @@ import { fetchResponse, getQuery } from '@/assets/fetch'
 import router from '@/router'
 import { ref } from 'vue'
 import DetailsTemplate from '@/components/DetailsTemplate.vue'
+import { useTripsStore } from '@/stores/trips'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps({
   id: String,
 })
+
+const tripStore = useTripsStore()
+const { activityIds, activityNames } = storeToRefs(tripStore)
 
 const activity = ref('')
 const imageUrl = ref('')
@@ -24,12 +29,19 @@ async function search() {
     const data = await response.json()
     activity.value = data.data[0]
     populateImageUrl(data.data[0].images)
-    console.log(activity.value)
   } else console.log(response.status)
 }
 
 function populateImageUrl(images) {
   imageUrl.value = images[0].url
+}
+
+function addActivity() {
+  if (router.currentRoute.value.name == 'addActivity') {
+    activityIds.value.push(activity.value.id)
+    activityNames.value.push(activity.value.title)
+    router.push({ name: 'createTrip' })
+  }
 }
 
 search()
@@ -40,7 +52,7 @@ search()
     <template #header-grid>
       <span class="material-symbols-outlined" @click="router.back"> arrow_back </span>
       <h2 class="heading header-grid__heading">Activity</h2>
-      <span class="material-symbols-outlined" @click="router.back"> add </span>
+      <span class="material-symbols-outlined" @click="addActivity"> add </span>
     </template>
 
     <template #image>
