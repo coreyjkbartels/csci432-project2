@@ -31,10 +31,27 @@ onMounted(() => {
       <RouterLink class="material-symbols-outlined" :to="{ name: 'createTrip' }">add</RouterLink>
     </div>
 
-    <p class="width-100"><em>Description:</em> {{ excursion.description }}</p>
-
-    <ul>
-      <li v-for="trip in excursion.trips" :key="trip.id">{{ trip }}</li>
-    </ul>
+    <div class="width-100">
+      <h3>Description</h3>
+      <p class="width-100">{{ excursion.description }}</p>
+    </div>
+    <div class="width-100">
+      <h3>Trips</h3>
+      <ul>
+        <RouterLink
+          class="list-link"
+          v-for="trip in excursion.trips"
+          :key="trip.id"
+          :to="{ path: `/trips/${trip._id}` }"
+          >{{ trip.name }}</RouterLink
+        >
+      </ul>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.main-column {
+  align-items: flex-start;
+}
+</style>

@@ -15,6 +15,7 @@ import ExcursionDetails from '@/views/ExcursionDetails.vue'
 import ActivityDetails from '@/views/ActivityDetails.vue'
 import CampgroundDetails from '@/views/CampgroundDetails.vue'
 import CreateTrip from '@/views/CreateTrip.vue'
+import TripDetails from '@/views/TripDetails.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -145,6 +146,16 @@ const router = createRouter({
           components: {
             default: CreateExcursion,
             right: ParkDetails,
+          },
+          props: true,
+        },
+
+        {
+          path: '/trips/:trip_id',
+          name: 'tripDetails',
+          components: {
+            default: ExcursionDetails,
+            right: TripDetails,
           },
           props: true,
         },
