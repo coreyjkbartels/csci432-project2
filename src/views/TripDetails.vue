@@ -9,6 +9,7 @@ const props = defineProps({
 
 const trip = ref('')
 const park = ref('')
+const campground = ref('')
 
 async function getTrip() {
   const endpoint = `/trip/${props.trip_id}`
@@ -18,6 +19,7 @@ async function getTrip() {
     const data = await response.json()
     trip.value = data.trip
     getPark(trip.value.park)
+    getCampground(trip.value.campground)
   } else console.log(response.status)
 }
 
@@ -27,6 +29,21 @@ async function deleteTrip() {
 
   if (response.status == 200) {
     router.back()
+  } else console.log(response.status)
+}
+
+async function getCampground(campgroundId) {
+  const queryOptions = {
+    q: campgroundId,
+    limit: 1,
+  }
+
+  const endpoint = `/campgrounds${getQuery(queryOptions)}`
+  const response = await fetchResponse(endpoint, 'GET')
+
+  if (response.status == 200) {
+    const data = await response.json()
+    campground.value = data.data[0]
   } else console.log(response.status)
 }
 
@@ -64,6 +81,11 @@ onMounted(() => {
     <div class="width-100">
       <h3>Park</h3>
       <p>{{ park.fullName }}</p>
+    </div>
+
+    <div class="width-100">
+      <h3>Campground</h3>
+      <p>{{ campground.name }}</p>
     </div>
 
     <div class="width-100">

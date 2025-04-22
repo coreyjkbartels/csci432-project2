@@ -1,5 +1,6 @@
 <script setup>
 import { fetchResponse, getQuery } from '@/assets/fetch'
+import router from '@/router'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -36,7 +37,7 @@ search()
         class="list-link"
         v-for="camp in camps"
         :key="camp.id"
-        :to="{ path: `/campgrounds/${camp.id}` }"
+        :to="{ path: `${router.currentRoute.value.fullPath}/${camp.id}` }"
       >
         {{ camp.name }}
       </RouterLink>

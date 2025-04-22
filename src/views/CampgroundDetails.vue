@@ -3,10 +3,15 @@ import { fetchResponse, getQuery } from '@/assets/fetch'
 import router from '@/router'
 import { ref } from 'vue'
 import DetailsTemplate from '@/components/DetailsTemplate.vue'
+import { useTripsStore } from '@/stores/trips'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps({
   id: String,
 })
+
+const tripStore = useTripsStore()
+const { campgroundName, campgroundId } = storeToRefs(tripStore)
 
 const campground = ref('')
 const imageUrl = ref('')
@@ -36,6 +41,14 @@ function populateImageUrl(images) {
   imageUrl.value = images[0].url
 }
 
+function addCampground() {
+  if (router.currentRoute.value.name == 'addCampground') {
+    campgroundId.value = campground.value.id
+    campgroundName.value = campground.value.name
+    router.push({ name: 'createTrip' })
+  }
+}
+
 search()
 </script>
 
@@ -44,7 +57,7 @@ search()
     <template #header-grid>
       <span class="material-symbols-outlined" @click="router.back"> arrow_back </span>
       <h2 class="heading header-grid__heading">Campground</h2>
-      <span class="material-symbols-outlined" @click="router.back"> add </span>
+      <span class="material-symbols-outlined" @click="addCampground"> add </span>
     </template>
 
     <template #image>

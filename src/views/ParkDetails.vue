@@ -12,7 +12,7 @@ const props = defineProps({
 })
 
 const tripStore = useTripsStore()
-const { parkId, parkName } = storeToRefs(tripStore)
+const { parkId, parkName, parkcode } = storeToRefs(tripStore)
 
 const park = ref('')
 const imageUrl = ref('')
@@ -81,6 +81,7 @@ function addPark() {
   if (router.currentRoute.value.name == 'addPark') {
     parkId.value = park.value.id
     parkName.value = park.value.name
+    parkcode.value = park.value.parkCode
     router.push({ name: 'createTrip' })
   }
 }
@@ -91,7 +92,7 @@ search()
 <template>
   <DetailsTemplate>
     <template #header-grid>
-      <RouterLink class="material-symbols-outlined" :to="{ name: 'parks' }">arrow_back </RouterLink>
+      <a class="material-symbols-outlined" @click="router.back">arrow_back </a>
       <h2 class="heading header-grid__heading">Park</h2>
       <a class="material-symbols-outlined" @click="addPark">add</a>
     </template>
@@ -114,23 +115,25 @@ search()
         <span>{{ park.states }}</span>
       </div>
       <div class="row">
-        <h4>Phone Numbers:</h4>
+        <h4>Phone:</h4>
         <span v-for="number in phoneNumbers" :key="number.id">{{ number.phoneNumber }}</span>
       </div>
       <div class="row">
-        <h4>Email Addresses:</h4>
+        <h4>Email:</h4>
         <span v-for="email in emailAddresses" :key="email.id">{{ email.emailAddress }}</span>
       </div>
     </template>
 
     <template #links>
-      <RouterLink :to="{ path: `/parks/${park.parkCode}/campgrounds` }" v-if="hasCampgrounds"
+      <RouterLink
+        :to="{ path: `${router.currentRoute.value.fullPath}/campgrounds` }"
+        v-if="hasCampgrounds"
         >Campgrounds</RouterLink
       >
       <RouterLink :to="{ path: `/parks/${park.parkCode}/activities` }" v-if="hasTTD"
         >Activities</RouterLink
       >
-      <a :href="park.url" target="_blank">Link to Site</a>
+      <a :href="park.url" target="_blank">Site</a>
     </template>
   </DetailsTemplate>
 </template>

@@ -149,6 +149,24 @@ const router = createRouter({
           },
           props: true,
         },
+        {
+          path: '/trips/new/parks/:parkCode/campgrounds',
+          name: 'addCampgrounds',
+          components: {
+            default: CreateExcursion,
+            right: CampgroundList,
+          },
+          props: true,
+        },
+        {
+          path: '/trips/new/parks/:parkCode/campgrounds/:id',
+          name: 'addCampground',
+          components: {
+            default: CreateExcursion,
+            right: CampgroundDetails,
+          },
+          props: true,
+        },
 
         {
           path: '/trips/:trip_id',

@@ -8,6 +8,9 @@ export const useTripsStore = defineStore('trips', () => {
   const endDate = ref('')
   const parkId = ref('')
   const parkName = ref('')
+  const campgroundName = ref('')
+  const campgroundId = ref('')
+  const parkcode = ref('')
 
   function $reset() {
     name.value = ref('')
@@ -16,6 +19,20 @@ export const useTripsStore = defineStore('trips', () => {
     endDate.value = ref('')
     parkId.value = ref('')
     parkName.value = ref('')
+    campgroundName.value = ref('')
+    campgroundId.value = ref('')
+    parkcode.value = ref('')
   }
-  return { name, description, startDate, endDate, parkId, parkName, $reset }
+  return {
+    name,
+    description,
+    startDate,
+    endDate,
+    parkId,
+    parkcode,
+    parkName,
+    campgroundName,
+    campgroundId,
+    $reset,
+  }
 })

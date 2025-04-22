@@ -6,7 +6,17 @@ import { useTripsStore } from '@/stores/trips'
 import { storeToRefs } from 'pinia'
 
 const tripStore = useTripsStore()
-const { name, description, startDate, endDate, parkId, parkName } = storeToRefs(tripStore)
+const {
+  name,
+  description,
+  startDate,
+  endDate,
+  parkId,
+  parkName,
+  parkcode,
+  campgroundName,
+  campgroundId,
+} = storeToRefs(tripStore)
 
 const excursionStore = useExcursionStore()
 const { trips } = storeToRefs(excursionStore)
@@ -19,6 +29,7 @@ async function create() {
     startDate: startDate.value,
     endDate: endDate.value,
     park: parkId.value,
+    campground: campgroundId.value,
   }
 
   const response = await fetchResponse(endpoint, 'POST', data)
@@ -31,10 +42,6 @@ async function create() {
     trips.value.push(responseData.trip)
     router.push({ name: 'createExcursion' })
   } else console.log(response.statusText)
-}
-
-function addPark() {
-  router.push({ name: 'addParks' })
 }
 </script>
 
@@ -70,9 +77,22 @@ function addPark() {
       <li class="form__field">
         <div class="row">
           <h3>Park</h3>
-          <a class="material-symbols-outlined" @click="addPark">add</a>
+          <a class="material-symbols-outlined" @click="router.push({ name: 'addParks' })">add</a>
         </div>
         <span class="width-100">{{ parkName }}</span>
+      </li>
+
+      <li class="form__field">
+        <div class="row">
+          <h3>Campground</h3>
+          <a
+            class="material-symbols-outlined"
+            @click="router.push({ path: `/trips/new/parks/${parkcode}/campgrounds` })"
+            v-if="parkId"
+            >add</a
+          >
+        </div>
+        <span class="width-100">{{ campgroundName }}</span>
       </li>
       <button class="span-2 margin-v20" @click="create">Submit</button>
     </form>
