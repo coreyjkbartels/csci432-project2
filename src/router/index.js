@@ -14,6 +14,7 @@ import CreateExcursion from '@/views/CreateExcursion.vue'
 import ExcursionDetails from '@/views/ExcursionDetails.vue'
 import ActivityDetails from '@/views/ActivityDetails.vue'
 import CampgroundDetails from '@/views/CampgroundDetails.vue'
+import CreateTrip from '@/views/CreateTrip.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,7 @@ const router = createRouter({
           name: 'parks',
           component: ParkList,
         },
+
         {
           path: '/parks/:parkCode',
           name: 'park',
@@ -108,15 +110,41 @@ const router = createRouter({
           path: '/excursions/new',
           name: 'createExcursion',
           components: {
-            default: ExcursionList,
-            right: CreateExcursion,
+            default: CreateExcursion,
           },
         },
         {
-          path: '/excursions/:_id',
+          path: '/excursions/:excursion_id',
           name: 'excursion',
           components: {
             default: ExcursionDetails,
+          },
+          props: true,
+        },
+        {
+          path: '/trips/new',
+          name: 'createTrip',
+          components: {
+            default: CreateExcursion,
+            right: CreateTrip,
+          },
+          props: true,
+        },
+        {
+          path: '/trips/new/parks',
+          name: 'addParks',
+          components: {
+            default: CreateExcursion,
+            right: ParkList,
+          },
+          props: true,
+        },
+        {
+          path: '/trips/new/parks/:parkCode',
+          name: 'addPark',
+          components: {
+            default: CreateExcursion,
+            right: ParkDetails,
           },
           props: true,
         },

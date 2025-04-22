@@ -3,10 +3,16 @@ import { fetchResponse, getQuery } from '@/assets/fetch'
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import DetailsTemplate from '@/components/DetailsTemplate.vue'
+import { useTripsStore } from '@/stores/trips'
+import { storeToRefs } from 'pinia'
+import router from '@/router'
 
 const props = defineProps({
   parkCode: String,
 })
+
+const tripStore = useTripsStore()
+const { trip } = storeToRefs(tripStore)
 
 const park = ref('')
 const imageUrl = ref('')
@@ -62,7 +68,6 @@ async function searchCampgrounds() {
   if (response.status == 200) {
     const data = await response.json()
     hasCampgrounds.value = data.data.length > 0
-    console.log(data.data)
   } else console.log(response.status)
 }
 
@@ -70,6 +75,13 @@ function populateImageUrl(images) {
   let numImages = images.length
   let imageIndex = Math.floor(Math.random() * numImages)
   imageUrl.value = images[imageIndex].url
+}
+
+function addPark() {
+  if (router.currentRoute.value.name == 'addPark') {
+    trip.value.park = park.value.id
+    router.push({ name: 'createTrip' })
+  }
 }
 
 search()
@@ -80,7 +92,7 @@ search()
     <template #header-grid>
       <RouterLink class="material-symbols-outlined" :to="{ name: 'parks' }">arrow_back </RouterLink>
       <h2 class="heading header-grid__heading">Park</h2>
-      <RouterLink class="material-symbols-outlined" :to="{ name: 'parks' }">add</RouterLink>
+      <a class="material-symbols-outlined" @click="addPark">add</a>
     </template>
 
     <template #image>

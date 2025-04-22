@@ -1,5 +1,6 @@
 <script setup>
 import { fetchResponse, getQuery } from '@/assets/fetch'
+import router from '@/router'
 import { ref } from 'vue'
 
 const stateCode = ref('')
@@ -35,7 +36,7 @@ async function search() {
         class="list-link"
         v-for="park in parks"
         :key="park.id"
-        :to="{ path: `/parks/${park.parkCode}` }"
+        :to="{ path: `${router.currentRoute.value.fullPath}/${park.parkCode}` }"
       >
         {{ park.name }}
       </RouterLink>
