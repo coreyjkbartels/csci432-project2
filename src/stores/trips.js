@@ -2,12 +2,20 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useTripsStore = defineStore('trips', () => {
-  const trip = ref({})
+  const name = ref('')
+  const description = ref('')
+  const startDate = ref('')
+  const endDate = ref('')
+  const parkId = ref('')
+  const parkName = ref('')
 
   function $reset() {
-    console.log('reset success')
-
-    trip.value = {}
+    name.value = ref('')
+    description.value = ref('')
+    startDate.value = ref('')
+    endDate.value = ref('')
+    parkId.value = ref('')
+    parkName.value = ref('')
   }
-  return { trip, $reset }
+  return { name, description, startDate, endDate, parkId, parkName, $reset }
 })

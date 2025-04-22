@@ -2,16 +2,12 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useExcursionStore = defineStore('excursions', () => {
-  const excursion = ref({
-    trips: [],
-  })
+  const trips = ref([])
 
   function $reset() {
     console.log('reset success')
 
-    excursion.value = {
-      trips: [],
-    }
+    trips.value = ref([])
   }
-  return { excursion, $reset }
+  return { trips, $reset }
 })

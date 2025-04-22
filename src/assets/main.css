@@ -46,6 +46,19 @@ span {
   padding: 0px 10px;
 }
 
+.margin-v20 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.height-100 {
+  height: 100%;
+}
+
+.width-100 {
+  width: 100%;
+}
+
 .main-column--right {
   align-items: start;
 
@@ -174,10 +187,6 @@ ul {
   scrollbar-color: var(--clr-neutral-300) transparent;
 }
 
-.height-100 {
-  height: 100%;
-}
-
 .material-symbols-outlined {
   color: white;
   background-color: transparent;
@@ -206,10 +215,6 @@ ul {
 .row {
   display: flex;
   gap: 10px;
-}
-
-.width-100 {
-  width: 100%;
 }
 
 .header-grid {

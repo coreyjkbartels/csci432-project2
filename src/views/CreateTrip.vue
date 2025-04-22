@@ -4,18 +4,12 @@ import router from '@/router'
 import { useExcursionStore } from '@/stores/excursions'
 import { useTripsStore } from '@/stores/trips'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
-
-const name = ref('')
-const description = ref('')
-const startDate = ref('')
-const endDate = ref('')
 
 const tripStore = useTripsStore()
-const { trip } = storeToRefs(tripStore)
+const { name, description, startDate, endDate, parkId, parkName } = storeToRefs(tripStore)
 
 const excursionStore = useExcursionStore()
-const { excursion } = storeToRefs(excursionStore)
+const { trips } = storeToRefs(excursionStore)
 
 async function create() {
   const endpoint = '/trip'
@@ -24,7 +18,7 @@ async function create() {
     description: description.value,
     startDate: startDate.value,
     endDate: endDate.value,
-    park: trip.value.park,
+    park: parkId.value,
   }
 
   const response = await fetchResponse(endpoint, 'POST', data)
@@ -33,10 +27,14 @@ async function create() {
     const responseData = await response.json()
     console.log(responseData)
 
-    tripStore.$reset
-    excursion.value.trips.push(responseData.trip._id)
+    tripStore.$reset()
+    trips.value.push(responseData.trip)
     router.push({ name: 'createExcursion' })
   } else console.log(response.statusText)
+}
+
+function addPark() {
+  router.push({ name: 'addParks' })
 }
 </script>
 
@@ -68,10 +66,21 @@ async function create() {
           <input type="datetime-local" name="end-date" id="end-date" v-model="endDate" />
         </li>
       </div>
-      <RouterLink :to="{ name: 'addParks' }">Add Park</RouterLink>
-      <button class="span-2" @click="create">Submit</button>
+
+      <li class="form__field">
+        <div class="row">
+          <h3>Park</h3>
+          <a class="material-symbols-outlined" @click="addPark">add</a>
+        </div>
+        <span class="width-100">{{ parkName }}</span>
+      </li>
+      <button class="span-2 margin-v20" @click="create">Submit</button>
     </form>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+h3 {
+  align-self: center;
+}
+</style>

@@ -12,7 +12,7 @@ const props = defineProps({
 })
 
 const tripStore = useTripsStore()
-const { trip } = storeToRefs(tripStore)
+const { parkId, parkName } = storeToRefs(tripStore)
 
 const park = ref('')
 const imageUrl = ref('')
@@ -79,7 +79,8 @@ function populateImageUrl(images) {
 
 function addPark() {
   if (router.currentRoute.value.name == 'addPark') {
-    trip.value.park = park.value.id
+    parkId.value = park.value.id
+    parkName.value = park.value.name
     router.push({ name: 'createTrip' })
   }
 }

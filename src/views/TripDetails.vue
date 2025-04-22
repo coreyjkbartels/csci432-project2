@@ -21,6 +21,15 @@ async function getTrip() {
   } else console.log(response.status)
 }
 
+async function deleteTrip() {
+  const endpoint = `/trip/${props.trip_id}`
+  const response = await fetchResponse(endpoint, 'DElETE')
+
+  if (response.status == 200) {
+    router.back()
+  } else console.log(response.status)
+}
+
 async function getPark(parkId) {
   const queryOptions = {
     q: parkId,
@@ -56,6 +65,7 @@ onMounted(() => {
       <h3>Park</h3>
       <p>{{ park.fullName }}</p>
     </div>
+
     <div class="width-100">
       <h3>Things To Do</h3>
       <ul>
@@ -64,5 +74,7 @@ onMounted(() => {
         }}</a>
       </ul>
     </div>
+
+    <a @click="deleteTrip">Delete</a>
   </div>
 </template>

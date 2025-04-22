@@ -18,6 +18,15 @@ async function getExcursion() {
   } else console.log(response.status)
 }
 
+async function deleteExcursion() {
+  const endpoint = `/excursion/${props.excursion_id}`
+  const response = await fetchResponse(endpoint, 'DELETE')
+
+  if (response.status == 200) {
+    router.push({ name: 'excursions' })
+  } else console.log(response.status)
+}
+
 onMounted(() => {
   getExcursion()
 })
@@ -47,6 +56,8 @@ onMounted(() => {
         >
       </ul>
     </div>
+
+    <a @click="deleteExcursion">Delete</a>
   </div>
 </template>
 

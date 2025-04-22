@@ -3,20 +3,20 @@ import { fetchResponse } from '@/assets/fetch'
 import router from '@/router'
 import { useExcursionStore } from '@/stores/excursions'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, toRaw } from 'vue'
 
 const name = ref('')
 const description = ref('')
 
 const excursionStore = useExcursionStore()
-const { excursion } = storeToRefs(excursionStore)
+const { trips } = storeToRefs(excursionStore)
 
 async function create() {
   const endpoint = '/excursion'
   const data = {
     name: name.value,
     description: description.value,
-    trips: excursion.value.trips,
+    trips: getIds(toRaw(trips.value)),
   }
 
   const response = await fetchResponse(endpoint, 'POST', data)
@@ -25,8 +25,22 @@ async function create() {
     const responseData = await response.json()
     console.log(responseData)
 
+    excursionStore.$reset()
     router.push({ name: 'excursions' })
   } else console.log(response.statusText)
+}
+
+function getIds(tripObjects) {
+  console.log(tripObjects)
+  let result = []
+
+  for (let trip of tripObjects) {
+    result.push(trip._id)
+  }
+
+  console.log(result)
+
+  return result
 }
 </script>
 
@@ -45,10 +59,24 @@ async function create() {
         <textarea name="description" id="description" v-model="description"></textarea>
       </li>
 
-      <RouterLink :to="{ name: 'createTrip' }">Add Trip</RouterLink>
-      <button class="span-2" @click="create">Submit</button>
+      <li class="form__field">
+        <div class="row">
+          <h3>Trips</h3>
+          <RouterLink class="material-symbols-outlined" :to="{ name: 'createTrip' }"
+            >add</RouterLink
+          >
+        </div>
+        <ul>
+          <li v-for="trip in trips" :key="trip.id">{{ trip.name }}</li>
+        </ul>
+      </li>
+      <button class="span-2 margin-v20" @click="create">Submit</button>
     </form>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+h3 {
+  align-self: center;
+}
+</style>
