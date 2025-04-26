@@ -4,6 +4,8 @@ import router from '@/router'
 import { ref, onMounted } from 'vue'
 
 const excursions = ref([])
+const invites = ref([])
+
 async function getExcursions() {
   const endpoint = '/excursions'
   const response = await fetchResponse(endpoint, 'GET')
@@ -14,8 +16,20 @@ async function getExcursions() {
   } else console.log(response.status)
 }
 
+async function getInvites() {
+  const endpoint = '/share/excursions'
+  const response = await fetchResponse(endpoint, 'GET')
+
+  if (response.status == 200) {
+    const responseData = await response.json()
+    invites.value = responseData.excursionInvites
+    console.log(responseData.excursionInvites)
+  } else console.log(response.status)
+}
+
 onMounted(() => {
   getExcursions()
+  getInvites()
 })
 </script>
 
@@ -37,6 +51,13 @@ onMounted(() => {
       >
         {{ excursion.name }}
       </a>
+    </ul>
+
+    <h3>Invites</h3>
+    <ul>
+      <div v-for="invite in invites" :key="invite.key">
+        {{ invite.excursion[0].name }}
+      </div>
     </ul>
   </div>
 </template>
