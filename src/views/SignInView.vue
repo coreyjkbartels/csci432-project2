@@ -46,7 +46,9 @@ async function signIn() {
         </form>
 
         <div class="row">
-          <RouterLink class="width-100 center-text" :to="{ name: 'signUp' }">Sign Up</RouterLink>
+          <RouterLink class="width-100 center-text invertedLink" :to="{ name: 'signUp' }"
+            >Sign Up</RouterLink
+          >
           <button @click="signIn">Submit</button>
         </div>
       </div>

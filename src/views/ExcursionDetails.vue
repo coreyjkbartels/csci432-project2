@@ -8,6 +8,7 @@ const props = defineProps({
 })
 
 const excursion = ref('')
+const host = ref()
 
 const users = ref([])
 const invitedUsers = ref([])
@@ -20,6 +21,7 @@ async function getExcursion() {
   if (response.status == 200) {
     const data = await response.json()
     excursion.value = data.excursion[0]
+    host.value = excursion.value.host[0].userName
   } else console.log(response.status)
 }
 
@@ -34,7 +36,7 @@ async function deleteExcursion() {
 
 async function loadUsers() {
   const queryParameters = {
-    limit: 15,
+    limit: 70,
   }
 
   const endpoint = `/users${getQuery(queryParameters)}`
@@ -62,6 +64,28 @@ async function inviteUsers() {
   }
 }
 
+async function leaveExcursion() {
+  const endpoint = `/leave/excursions/${props.excursion_id}`
+  const response = await fetchResponse(endpoint, 'DELETE')
+
+  if (response.status == 200) {
+    router.push({ name: 'excursions' })
+  }
+}
+
+async function removeParticipant(participantId) {
+  const data = {
+    participantId: participantId,
+  }
+  const endpoint = `/remove/excursions/${props.excursion_id}`
+
+  const response = await fetchResponse(endpoint, 'DELETE', data)
+
+  if (response.status == 200) {
+    getExcursion()
+  }
+}
+
 onMounted(() => {
   getExcursion()
 })
@@ -79,6 +103,7 @@ onMounted(() => {
       <h3>Description</h3>
       <p class="width-100">{{ excursion.description }}</p>
     </div>
+
     <div class="width-100">
       <h3>Trips</h3>
       <ul>
@@ -92,8 +117,30 @@ onMounted(() => {
       </ul>
     </div>
 
-    <a @click="loadUsers">Add Participants</a>
-    <a @click="deleteExcursion">Delete</a>
+    <div class="width-100">
+      <h3>Host</h3>
+      <span>{{ host }}</span>
+    </div>
+
+    <div class="width-100">
+      <div class="row">
+        <h3>Participants</h3>
+        <a @click="loadUsers" class="material-symbols-outlined">add</a>
+      </div>
+
+      <ul>
+        <li
+          class="row row--space-between width-100"
+          v-for="participant in excursion.participants"
+          :key="participant.key"
+        >
+          <span>{{ participant.userName }}</span>
+          <a class="material-symbols-outlined" @click="removeParticipant(participant._id)"
+            >remove</a
+          >
+        </li>
+      </ul>
+    </div>
 
     <form onsubmit="return false" v-if="showInviteUserForm">
       <ul>
@@ -105,6 +152,11 @@ onMounted(() => {
 
       <button type="button" @click="inviteUsers">Submit</button>
     </form>
+
+    <div class="row row--space-between width-100">
+      <a @click="leaveExcursion">Leave</a>
+      <a @click="deleteExcursion">Delete</a>
+    </div>
   </div>
 </template>
 

@@ -15,6 +15,13 @@ function assignInfo(data) {
   email.value = data.email
 }
 
+async function deleteUser() {
+  const endpoint = '/user'
+  const response = await fetchResponse(endpoint, 'DELETE')
+
+  router.push({ name: 'home' })
+}
+
 onMounted(async () => {
   const endpoint = '/user'
   const response = await fetchResponse(endpoint, 'GET')
@@ -48,7 +55,8 @@ onMounted(async () => {
         <input type="text" v-model="email" disabled />
       </li>
 
-      <button class="span-2" @click="router.push({ name: 'edit' })">Edit</button>
+      <button @click="router.push({ name: 'edit' })">Edit</button>
+      <button @click="deleteUser">Delete</button>
     </form>
   </div>
 </template>

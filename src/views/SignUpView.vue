@@ -45,7 +45,7 @@ async function signUp() {
             <label for="uname">Username</label>
             <input type="text" id="uname" name="uname" v-model="userName" />
           </li>
-          <div class="row">
+          <div class="row width-100">
             <li class="form__field">
               <label for="fname">First Name</label>
               <input type="text" id="fname" name="fname" v-model="firstName" />
@@ -66,17 +66,12 @@ async function signUp() {
         </form>
 
         <div class="row">
-          <RouterLink class="width-100 center-text" :to="{ name: 'signIn' }">Sign In</RouterLink>
+          <RouterLink class="width-100 center-text invertedLink" :to="{ name: 'signIn' }"
+            >Sign In</RouterLink
+          >
           <button @click="signUp">Submit</button>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-.row {
-  display: flex;
-  gap: 10px;
-}
-</style>

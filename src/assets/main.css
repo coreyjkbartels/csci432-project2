@@ -29,15 +29,6 @@ span {
   grid-template-columns: 1fr 2fr 1fr;
 }
 
-.main-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-
-  padding: 0px 30px;
-}
-
 .padding-0 {
   padding: 0px;
 }
@@ -51,12 +42,36 @@ span {
   margin-bottom: 20px;
 }
 
+.margin-shiftLeft10 {
+  margin-left: -10px;
+}
+
 .height-100 {
   height: 100%;
 }
 
 .width-100 {
   width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+
+  align-items: center;
+}
+
+.row--space-between {
+  justify-content: space-between;
+}
+
+.main-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+
+  padding: 0px 30px;
 }
 
 .main-column--right {
@@ -92,6 +107,7 @@ button {
 }
 
 a:hover,
+.invertedLink,
 button {
   color: var(--clr-blue-700);
   background-color: var(--clr-neutral-100);
@@ -110,11 +126,13 @@ button {
   font-size: var(--fs-650);
 }
 
+.invertedLink,
 button {
   width: 100%;
   border: 1px solid transparent;
 }
 
+.invertedLink:hover,
 button:hover {
   background-color: var(--clr-blue-700);
   color: var(--clr-neutral-300);
@@ -160,6 +178,8 @@ button:hover {
 
   color: var(--clr-neutral-300);
   margin-bottom: 10px;
+
+  width: 100%;
 }
 
 input,
@@ -210,11 +230,6 @@ ul {
 .material-symbols-outlined:hover {
   background-color: var(--clr-neutral-200);
   color: var(--clr-blue-700);
-}
-
-.row {
-  display: flex;
-  gap: 10px;
 }
 
 .header-grid {

@@ -27,6 +27,19 @@ async function getInvites() {
   } else console.log(response.status)
 }
 
+async function handleInvite(accepted, inviteId) {
+  const data = {
+    isAccepted: accepted,
+  }
+
+  const endpoint = `/share/excursions/${inviteId}`
+  const response = await fetchResponse(endpoint, 'PATCH', data)
+
+  console.log(response.status)
+  getExcursions()
+  getInvites()
+}
+
 onMounted(() => {
   getExcursions()
   getInvites()
@@ -43,7 +56,7 @@ onMounted(() => {
       </span>
     </div>
 
-    <ul class="height-100">
+    <ul class="height-100" v-if="excursions.length > 0">
       <a
         v-for="excursion in excursions"
         :key="excursion.id"
@@ -53,10 +66,20 @@ onMounted(() => {
       </a>
     </ul>
 
-    <h3>Invites</h3>
-    <ul>
-      <div v-for="invite in invites" :key="invite.key">
-        {{ invite.excursion[0].name }}
+    <h3 class="align-left">Invites</h3>
+    <ul class="invites">
+      <div v-for="invite in invites" :key="invite.key" class="invite-card">
+        <h3>{{ invite.excursion[0].name }}</h3>
+
+        <div>
+          <p>{{ invite.excursion[0].description }}</p>
+          <span>{{ invite.sender[0].userName }}</span>
+        </div>
+
+        <div class="row">
+          <button @click="handleInvite(true, invite._id)">Accept</button>
+          <button @click="handleInvite(false, invite._id)">Decline</button>
+        </div>
       </div>
     </ul>
   </div>
@@ -66,5 +89,24 @@ onMounted(() => {
 a {
   display: block;
   width: 95%;
+}
+
+.invite-card {
+  margin-bottom: 10px;
+  padding: 20px 25px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.invites {
+  max-height: 500px;
+}
+
+.align-left {
+  align-self: flex-start;
 }
 </style>
