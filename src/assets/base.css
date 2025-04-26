@@ -24,6 +24,9 @@
 
   --clr-blue-700: rgba(12, 32, 41, 0.95);
 
+  --clr-red-300: #dc143c;
+  --clr-red-100: #f08080;
+
   --color-text: var(--clr-neutral-50);
 }
 

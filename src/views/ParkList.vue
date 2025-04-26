@@ -9,7 +9,7 @@ const parks = ref([])
 async function search() {
   const queryOptions = {
     stateCode: stateCode.value,
-    limit: 15,
+    limit: 50,
   }
 
   const endpoint = `/national-parks/summary${getQuery(queryOptions)}`

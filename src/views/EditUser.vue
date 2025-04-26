@@ -22,7 +22,7 @@ async function edit() {
   let response = await fetchResponse(endpoint, 'PATCH', data)
   if (response.status == 200) {
     data = await response.json()
-
+    localStorage.setItem('userName', data.user.userName)
     router.push({ name: 'profile' })
   } else console.log(response.statusText)
 }

@@ -4,7 +4,6 @@
   <div class="main-column">
     <h2 class="heading heading--shiftedRight">Navigation</h2>
     <div class="nav__links nav--column">
-      <RouterLink class="list-link list-link--emphasized" :to="{ name: 'main' }">Home</RouterLink>
       <RouterLink class="list-link list-link--emphasized" :to="{ name: 'parks' }">Parks</RouterLink>
       <RouterLink class="list-link list-link--emphasized" :to="{ name: 'excursions' }"
         >Excursions</RouterLink

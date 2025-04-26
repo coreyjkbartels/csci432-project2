@@ -9,6 +9,7 @@ const props = defineProps({
 
 const excursion = ref('')
 const host = ref()
+const userName = ref(localStorage.getItem('userName'))
 
 const users = ref([])
 const invitedUsers = ref([])
@@ -26,6 +27,8 @@ async function getExcursion() {
 }
 
 async function deleteExcursion() {
+  if (!confirm('Are you sure you want to delete this excursion?')) return
+
   const endpoint = `/excursion/${props.excursion_id}`
   const response = await fetchResponse(endpoint, 'DELETE')
 
@@ -49,6 +52,7 @@ async function loadUsers() {
 }
 
 async function inviteUsers() {
+  showInviteUserForm.value = false
   const endpoint = `/share/excursion/${props.excursion_id}`
   for (let user of invitedUsers.value) {
     const data = {
@@ -59,12 +63,13 @@ async function inviteUsers() {
     if (response.status == 201) {
       const responseData = await response.json()
       console.log(responseData)
-      showInviteUserForm.value = false
     } else console.log(response.status)
   }
 }
 
 async function leaveExcursion() {
+  if (!confirm('Are you sure you want to leave this excursion?')) return
+
   const endpoint = `/leave/excursions/${props.excursion_id}`
   const response = await fetchResponse(endpoint, 'DELETE')
 
@@ -99,13 +104,13 @@ onMounted(() => {
       <RouterLink class="material-symbols-outlined" :to="{ name: 'createTrip' }">add</RouterLink>
     </div>
 
-    <div class="width-100">
+    <div class="width-100 padding-10">
       <h3>Description</h3>
       <p class="width-100">{{ excursion.description }}</p>
     </div>
 
     <div class="width-100">
-      <h3>Trips</h3>
+      <h3 class="padding-10">Trips</h3>
       <ul>
         <RouterLink
           class="list-link"
@@ -117,12 +122,12 @@ onMounted(() => {
       </ul>
     </div>
 
-    <div class="width-100">
+    <div class="width-100 padding-10" v-if="host != userName">
       <h3>Host</h3>
       <span>{{ host }}</span>
     </div>
 
-    <div class="width-100">
+    <div class="width-100 padding-10">
       <div class="row">
         <h3>Participants</h3>
         <a @click="loadUsers" class="material-symbols-outlined">add</a>
@@ -142,8 +147,8 @@ onMounted(() => {
       </ul>
     </div>
 
-    <form onsubmit="return false" v-if="showInviteUserForm">
-      <ul>
+    <form class="width-100" onsubmit="return false" v-if="showInviteUserForm">
+      <ul class="width-100">
         <li v-for="user in users" :key="user.id" class="row">
           <input type="checkbox" :value="user._id" :id="user._id" v-model="invitedUsers" />
           <label :for="user._id">{{ user.userName }}</label>
@@ -153,9 +158,9 @@ onMounted(() => {
       <button type="button" @click="inviteUsers">Submit</button>
     </form>
 
-    <div class="row row--space-between width-100">
-      <a @click="leaveExcursion">Leave</a>
-      <a @click="deleteExcursion">Delete</a>
+    <div class="row row--space-between width-100 padding-10">
+      <button class="red-button" @click="leaveExcursion">Leave</button>
+      <button class="red-button" @click="deleteExcursion">Delete</button>
     </div>
   </div>
 </template>
@@ -167,5 +172,12 @@ onMounted(() => {
 
 input {
   width: auto;
+}
+
+form > ul {
+  margin-bottom: 20px;
+  padding: 5px;
+  border: 0.5px solid white;
+  border-radius: 7px;
 }
 </style>

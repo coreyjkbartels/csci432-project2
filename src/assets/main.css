@@ -139,6 +139,15 @@ button:hover {
   border: 1px solid var(--clr-neutral-300);
 }
 
+.red-button {
+  background-color: var(--clr-red-100);
+}
+
+.red-button:hover {
+  color: var(--clr-red-100);
+  border: 1px solid var(--clr-red-100);
+}
+
 .nav {
   display: flex;
   align-items: center;

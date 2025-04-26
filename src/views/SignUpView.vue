@@ -25,8 +25,8 @@ async function signUp() {
   if (response.status == 201) {
     data = await response.json()
     localStorage.setItem('token', data.token)
-
-    router.push({ name: 'main' })
+    localStorage.setItem('userName', data.user.userName)
+    router.push({ name: 'parks' })
   } else console.log(response.statusText)
 }
 </script>

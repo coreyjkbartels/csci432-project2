@@ -11,7 +11,7 @@ const activities = ref([])
 async function search() {
   const queryOptions = {
     parkCode: props.parkCode,
-    limit: 15,
+    limit: 50,
   }
 
   const endpoint = `/things-to-do${getQuery(queryOptions)}`

@@ -12,7 +12,7 @@ const camps = ref([])
 async function search() {
   const queryOptions = {
     parkCode: props.parkCode,
-    limit: 15,
+    limit: 50,
   }
 
   const endpoint = `/campgrounds${getQuery(queryOptions)}`

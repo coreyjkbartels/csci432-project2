@@ -16,6 +16,8 @@ function assignInfo(data) {
 }
 
 async function deleteUser() {
+  if (!confirm('Are you sure you want to delete?')) return
+
   const endpoint = '/user'
   const response = await fetchResponse(endpoint, 'DELETE')
 
@@ -56,7 +58,7 @@ onMounted(async () => {
       </li>
 
       <button @click="router.push({ name: 'edit' })">Edit</button>
-      <button @click="deleteUser">Delete</button>
+      <button class="red-button" @click="deleteUser">Delete</button>
     </form>
   </div>
 </template>

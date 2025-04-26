@@ -5,6 +5,7 @@ import { ref, onMounted } from 'vue'
 
 const excursions = ref([])
 const invites = ref([])
+const userName = ref(localStorage.getItem('userName'))
 
 async function getExcursions() {
   const endpoint = '/excursions'
@@ -23,7 +24,6 @@ async function getInvites() {
   if (response.status == 200) {
     const responseData = await response.json()
     invites.value = responseData.excursionInvites
-    console.log(responseData.excursionInvites)
   } else console.log(response.status)
 }
 
@@ -35,11 +35,19 @@ async function handleInvite(accepted, inviteId) {
   const endpoint = `/share/excursions/${inviteId}`
   const response = await fetchResponse(endpoint, 'PATCH', data)
 
-  console.log(response.status)
   getExcursions()
   getInvites()
 }
 
+async function revokeInvitation(inviteId) {
+  if (!confirm('Are you sure you want to revoke this invitation?')) return
+
+  const endpoint = `/share/excursions/${inviteId}`
+  const response = await fetchResponse(endpoint, 'DELETE')
+
+  getExcursions()
+  getInvites()
+}
 onMounted(() => {
   getExcursions()
   getInvites()
@@ -66,20 +74,33 @@ onMounted(() => {
       </a>
     </ul>
 
-    <h3 class="align-left">Invites</h3>
+    <h3 class="align-left padding-10">Invites</h3>
     <ul class="invites">
       <div v-for="invite in invites" :key="invite.key" class="invite-card">
         <h3>{{ invite.excursion[0].name }}</h3>
 
         <div>
           <p>{{ invite.excursion[0].description }}</p>
-          <span>{{ invite.sender[0].userName }}</span>
+          <span v-if="invite.sender[0].userName != userName"
+            >From: {{ invite.sender[0].userName }}</span
+          >
+          <span v-if="invite.sender[0].userName == userName"
+            >To: {{ invite.receiver[0].userName }}</span
+          >
         </div>
 
-        <div class="row">
+        <div class="row" v-if="invite.sender[0].userName != userName">
           <button @click="handleInvite(true, invite._id)">Accept</button>
           <button @click="handleInvite(false, invite._id)">Decline</button>
         </div>
+
+        <button
+          class="red-button"
+          @click="revokeInvitation(invite._id)"
+          v-if="invite.sender[0].userName == userName"
+        >
+          Revoke
+        </button>
       </div>
     </ul>
   </div>
